@@ -1,0 +1,43 @@
+name: Compilar Labrador para Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v5
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Crear instalador y versión portable
+        run: npm run dist
+
+      - name: Guardar ejecutables
+        uses: actions/upload-artifact@v4
+        with:
+          name: Labrador-Escritorio-Windows
+          path: dist/*
+          if-no-files-found: error
+          compression-level: 0
+
+      - name: Publicar en GitHub Releases
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
