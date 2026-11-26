@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Labrador de Escritorio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="mascot" aria-label="Labrador negro animado">
+    <div id="speech" aria-live="polite"></div>
+    <div class="drag-handle" title="Arrastrar mascota">⠿</div>
+    <div id="puppy" title="¡Hola! Soy tu compañero de escritorio."></div>
+    <div id="hint">Clic: guau · Clic derecho: opciones · Arrastrame para moverme</div>
+  </main>
+  <script src="renderer.js"></script>
+</body>
+</html>
